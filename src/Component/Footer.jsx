@@ -56,7 +56,7 @@ const Footer = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/footer", formData);
+      await axios.post("https://frontend-zeta-eight-51.vercel.app/", formData);
       alert("✅ Subscription successful!");
       subscribedEmails.push(formData.email);
       localStorage.setItem("subscribedEmails", JSON.stringify(subscribedEmails));
