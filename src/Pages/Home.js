@@ -484,7 +484,7 @@ const Home = () => {
         {/* Section Header */}
         <Typography
           sx={{
-            color: "#333",
+            color: "red",
             textAlign: "center",
             fontWeight: 600,
             fontSize: { xs: "1.1rem", md: "1.3rem" },

@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Container, Typography, keyframes } from "@mui/material";
+import { Box, Container, Typography, keyframes,useMediaQuery,
+  useTheme, } from "@mui/material";
 import image9 from "../image/img9.jpg";
 import Button from "@mui/material/Button";
 import Header from "../Component/Header";
@@ -85,6 +86,9 @@ const fadeInShadowSlideUp = keyframes`
 `;
 
 const About = () => {
+   const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
 
     <Box
@@ -105,7 +109,7 @@ const About = () => {
 
 
       <Typography
-        variant="h3"
+            variant={isMobile ? "h4" : "h3"}
         sx={{
           color: "white",
           textAlign: "center",
@@ -122,7 +126,7 @@ const About = () => {
       {aboutSections.map((section, index) => (
         <Box
           key={section.id}
-          sx={{ width: "100%", padding: index === 0 ? "80px 0 0 0" : "60px 0" }}
+          sx={{ width: "100%", padding: index === 0 ? "50px 0 0 0" : "60px 0" }}
         >
           <Container>
             <Box
@@ -164,7 +168,7 @@ const About = () => {
                 }}
               >
                 <Typography sx={{ color: "red" }}>{section.title}</Typography>
-                <Typography variant="h3" sx={{ fontWeight: 700, mt: 1 }}>
+                <Typography variant="h3" sx={{ fontWeight: 700, mt: 1 ,fontSize: 45}}>
                   {section.heading}
                 </Typography>
                 <Typography sx={{ color: "gray", marginTop: "20px" }}>
@@ -229,7 +233,7 @@ const About = () => {
               }}
             >
               <Typography sx={{ color: "red" }}>Reable Features</Typography>
-              <Typography variant="h3" sx={{ fontWeight: 550 }}>
+              <Typography variant="h4" sx={{ fontWeight: 550}}>
                 All our technicians are equipped with the latest portable technology
               </Typography>
               <Typography sx={{ color: "gray", marginTop: "15px" }}>
@@ -333,7 +337,7 @@ const About = () => {
       <Box sx={{ width: "100%", padding: "50px 0" }}>
         <Container>
           <Typography sx={{ color: "red", textAlign: "center" }}>Our Technicians</Typography>
-          <Typography variant="h3" sx={{ fontWeight: "bold", textAlign: "center" }}>
+          <Typography variant="h4" sx={{ fontWeight: "bold", textAlign: "center" }}>
             Meet Our Leadership
           </Typography>
           <Box
