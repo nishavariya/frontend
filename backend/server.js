@@ -14,17 +14,17 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/contactform", {
+mongoose.connect("mongodb+srv://nisha:nisha2007@cluster0.1stireb.mongodb.net/Formdata",{
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
-.then(() => console.log("MongoDB connected"))
-.catch((err) => console.error("MongoDB connection error:", err));
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Routes
-app.use('/contect', contactRoutes);
-app.use('/api/appointments', appointmentRoutes); 
-app.use('/footer', footerRoutes); 
+app.use('/api/contect', contactRoutes);
+app.use('/api/appointments', appointmentRoutes);
+app.use('/footer', footerRoutes);
 
 // Start server
 app.listen(PORT, () => {

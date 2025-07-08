@@ -9,4 +9,4 @@ const footerSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("Footer", footerSchema);
+module.exports = mongoose.model("footer", footerSchema);

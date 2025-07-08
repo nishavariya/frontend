@@ -376,7 +376,7 @@ const Appointment = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/appointments", {
+      const response = await fetch("https://full-stack-1-jmh6.onrender.com/api/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(appointmentData),

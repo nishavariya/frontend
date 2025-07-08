@@ -7,4 +7,4 @@ const contectSchema = new mongoose.Schema({
   message: { type: String, required: true },
 }, { timestamps: true });
 
-module.exports = mongoose.model("Contect", contectSchema);
+module.exports = mongoose.model("contect", contectSchema);

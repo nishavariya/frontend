@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Footer from "../Component/Footer";
-import { Box, Container, Typography, Dialog, IconButton, Button, Modal } from "@mui/material";
+import { Box, Container, Typography, Button, Modal } from "@mui/material";
 import PlayArrowSharpIcon from "@mui/icons-material/PlayArrowSharp";
-import CloseIcon from "@mui/icons-material/Close";
+// import CloseIcon from "@mui/icons-material/Close";
 import image1 from "../image/img1.jpg";
 import image2 from "../image/img2.jpg";
 import home from "../image/home.jpg";
@@ -17,7 +17,7 @@ import Header from "../Component/Header";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Top from "../Component/Top";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import merge from "../image/merged.mp4";
 
 const lines = [
@@ -25,6 +25,7 @@ const lines = [
   ["Qualified", "&"],
   ["Professional"],
 ];
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -56,9 +57,15 @@ const Home = () => {
       slug: "gold",
     },
   ];
+   const images = [image4, image5, image6, image7];
+  const titles = [
+    "Engine Diagnostics",
+    "System Service",
+    "Electrical System",
+    "Tire and Wheel",
+  ];
 
   return (
-
     <Box>
       <Top />
       <Box
@@ -72,17 +79,35 @@ const Home = () => {
           backgroundAttachment: "fixed",
           position: "relative",
           color: "white",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <Header />
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
+        <Container
+          maxWidth="lg"
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            px: 2,
+          }}
+        >
           <Typography
             component="div"
             variant="h2"
             sx={{
               fontWeight: 850,
-              pt: { xs: 10, sm: 10, md: 5 },
-              fontSize: { xs: "2.5rem", sm: "4rem", md: "4.4rem", lg: "6rem" },
+              fontSize: {
+                xs: "2rem",
+                sm: "3rem",
+                md: "4rem",
+                lg: "5rem",
+              },
               lineHeight: 1.1,
               userSelect: "none",
               zIndex: 2,
@@ -94,7 +119,7 @@ const Home = () => {
                 sx={{
                   mb: lineIndex !== lines.length - 1 ? 1 : 0,
                   display: "flex",
-                  gap: 3,
+                  gap: 2,
                   flexWrap: "wrap",
                 }}
               >
@@ -139,7 +164,8 @@ const Home = () => {
 
           <Box
             sx={{
-              width: { xs: "100%", sm: "80%", md: "70%", lg: "60%", xl: "50%" },
+              width: "100%",
+              maxWidth: 500,
               mt: 4,
               display: "flex",
               flexDirection: { xs: "column", sm: "row" },
@@ -157,6 +183,7 @@ const Home = () => {
                 py: 1.5,
                 fontWeight: 600,
                 fontSize: "1rem",
+                width: { xs: "100%", sm: "auto" },
                 "&:hover": {
                   backgroundColor: "#b80322",
                   boxShadow: "0 0 15px #b80322",
@@ -169,20 +196,19 @@ const Home = () => {
             </Button>
 
             <Box
+              onClick={handleOpenVideo}
               sx={{
                 display: "flex",
                 alignItems: "center",
                 gap: 1.5,
-                mt: { xs: 2, sm: 0 },
+                mt: { xs: 1, sm: 0 },
                 cursor: "pointer",
                 color: "white",
                 "&:hover": {
                   color: "#d90429",
-                  textShadow:
-                    "0 0 0px #d90429, 0 0 2px #d90429, 0 0 2px #d90429",
+                  textShadow: "0 0 2px #d90429, 0 0 2px #d90429",
                 },
               }}
-              onClick={handleOpenVideo}
             >
               <Box
                 sx={{
@@ -204,7 +230,10 @@ const Home = () => {
               >
                 <PlayArrowSharpIcon />
               </Box>
-              <Typography variant="h6" sx={{ fontWeight: 400 }}>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 400, fontSize: { xs: "1rem", sm: "1.1rem" } }}
+              >
                 How We Work
               </Typography>
             </Box>
@@ -212,7 +241,6 @@ const Home = () => {
         </Container>
       </Box>
 
-      {/* Video Modal */}
       <Modal open={open} onClose={handleCloseVideo}>
         <Box
           sx={{
@@ -220,31 +248,31 @@ const Home = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "90%",
-            maxWidth: 800,
-            height: "50vh",
+            width: { xs: "90vw", sm: "80vw", md: "700px" },
+            height: { xs: "40vh", sm: "50vh" },
             bgcolor: "black",
             borderRadius: 2,
-            overflow: "hidden"
+            overflow: "hidden",
+            outline: "none",
           }}
         >
           <video
             controls
             autoPlay
             muted
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
           >
-            <source
-              src={merge}
-              type="video/mp4"
-            />
-
+            <source src={merge} type="video/mp4" />
             Your browser does not support HTML5 video.
           </video>
         </Box>
       </Modal>
 
-      {/* 2nd section */}
+      {/* Responsive Text & Image Section */}
       <Box
         sx={{
           display: "flex",
@@ -253,53 +281,36 @@ const Home = () => {
           textAlign: "center",
           alignItems: "center",
           flexDirection: { xs: "column", sm: "row" },
+          px: 2,
+          py: 0,
+          gap: 3,
+          bgcolor: "#0e0e0e",
         }}
       >
         {/* Text Box 1 */}
         <Box
           sx={{
-            width: {
-              xs: "100%",
-              sm: "50%",
-              md: "33.33%",
-              lg: "25%",
-              xl: "20%",
-              xxl: "15%",
-            },
-            height: {
-              xs: "150px",
-              sm: "200px",
-              md: "230px",
-              lg: "270px",
-              xl: "300px",
-              xxl: "330px",
-            },
+            flex: { xs: "1 1 100%", sm: "1 1 45%", md: "1 1 30%", lg: "1 1 20%" },
+            height: { xs: "100px", sm: "100px", md: "180px", lg: "250px" },
             backgroundColor: "#14151f",
             perspective: "1000px",
-            mb: { xs: 2, sm: 0 },
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
-            '&:hover': {
+            "&:hover": {
               transform: "scale(1.05) rotateY(10deg) rotateX(5deg)",
               boxShadow: "0 8px 30px rgba(6, 6, 6, 0.7)",
             },
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 2,
           }}
         >
           <Typography
-            variant="h5"
+            variant="h6"
             sx={{
               color: "white",
               fontWeight: 700,
               fontFamily: "'Poppins', sans-serif",
-              textAlign: "left",
-              padding: {
-                xs: "20px 20px",
-                sm: "40px 30px",
-                md: "60px 40px",
-                lg: "80px 40px",
-                xl: "90px 50px",
-                xxl: "100px 60px",
-              },
-
               animation: "pulseShadowBounce 5s infinite ease-in-out",
             }}
           >
@@ -310,46 +321,26 @@ const Home = () => {
         {/* Text Box 2 */}
         <Box
           sx={{
-            width: {
-              xs: "100%",
-              sm: "50%",
-              md: "33.33%",
-              lg: "25%",
-              xl: "20%",
-              xxl: "15%",
-            },
-            height: {
-              xs: "150px",
-              sm: "200px",
-              md: "230px",
-              lg: "270px",
-              xl: "300px",
-              xxl: "330px",
-            },
-            backgroundColor: "black",
-            mb: { xs: 2, sm: 0 },
+            flex: { xs: "1 1 100%", sm: "1 1 45%", md: "1 1 30%", lg: "1 1 20%" },
+            height: { xs: "100px", sm: "100px", md: "180px", lg: "250px" },
+            backgroundColor: "#000",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
-            '&:hover': {
+            "&:hover": {
               transform: "scale(1.05) translateY(-5px)",
               boxShadow: "0 8px 30px rgba(7, 7, 7, 0.7)",
             },
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 2,
           }}
         >
           <Typography
-            variant="h5"
+            variant="h6"
             sx={{
               color: "white",
               fontWeight: 700,
               fontFamily: "'Poppins', sans-serif",
-              textAlign: "left",
-              padding: {
-                xs: "20px 20px",
-                sm: "40px 30px",
-                md: "60px 40px",
-                lg: "80px 40px",
-                xl: "90px 50px",
-                xxl: "100px 60px",
-              },
               animation: "pulseShadowBounce 5s infinite ease-in-out",
             }}
           >
@@ -360,28 +351,14 @@ const Home = () => {
         {/* Image Box */}
         <Box
           sx={{
-            width: {
-              xs: "100%",
-              sm: "100%",
-              md: "33.33%",
-              lg: "50%",
-              xl: "60%",
-              xxl: "70%",
-            },
-            height: {
-              xs: "250px",
-              sm: "250px",
-              md: "270px",
-              lg: "270px",
-              xl: "300px",
-              xxl: "330px",
-            },
+            flex: { xs: "1 1 100%", sm: "1 1 100%", md: "1 1 100%", lg: "1 1 50%" },
+            height: { xs: "200px", sm: "250px", md: "280px", lg: "300px" },
             overflow: "hidden",
             borderRadius: 2,
             boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
             transition: "transform 0.4s ease, box-shadow 0.4s ease",
-            '&:hover': {
-              transform: "scale(1) translateY(-5px)",
+            "&:hover": {
+              transform: "scale(1.03) translateY(-5px)",
               boxShadow: "0 10px 40px rgba(54, 50, 51, 0.8)",
             },
           }}
@@ -394,47 +371,32 @@ const Home = () => {
               height: "100%",
               objectFit: "cover",
               animation: "zoomFade 8s infinite ease-in-out",
-              transition: "transform 0.4s ease",
             }}
           />
         </Box>
 
         <style>{`
-    @keyframes flipY {
-      0%, 100% {
-        transform: rotateY(0deg);
-        color: white;
-        text-shadow: 0 0 10px #d90429;
-      }
-      50% {
-        transform: rotateY(180deg);
-        color:rgb(0, 0, 0);
-        text-shadow: 0 0 20px #d90429;
-      }
-    }
-    @keyframes pulseShadowBounce {
-      0%, 100% {
-        transform: translateY(0);
-        text-shadow: 0 0 5pxrgb(8, 8, 8);
-        color: white;
-      }
-      50% {
-        transform: translateY(-10px);
-        text-shadow: 0 0 20pxrgb(10, 10, 10);
-        color:rgb(255, 255, 255);
-      }
-    }
-    @keyframes zoomFade {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 0.8;
-      }
-    }
-  `}</style>
+          @keyframes pulseShadowBounce {
+            0%, 100% {
+              transform: translateY(0);
+              text-shadow: 0 0 5px #d90429;
+            }
+            50% {
+              transform: translateY(-10px);
+              text-shadow: 0 0 20px #d90429;
+            }
+          }
+          @keyframes zoomFade {
+            0%, 100% {
+              transform: scale(1);
+              opacity: 1;
+            }
+            50% {
+              transform: scale(1.1);
+              opacity: 0.8;
+            }
+          }
+        `}</style>
       </Box>
 
       {/*3 section*/}
@@ -511,144 +473,110 @@ const Home = () => {
       </Box>
 
       {/* 4th section */}
-      <Box
-        sx={{
-          width: "100%",
-          py: { xs: 5, md: 12 },
-          backgroundColor: "rgb(250, 250, 255)",
-        }}
-      >
-        <Container>
-          <Typography
-            sx={{
-              color: "#d90429",
-              textAlign: "center",
-              fontWeight: 600,
-              fontSize: { xs: "1.1rem", md: "1.3rem" },
-              mb: 1,
-            }}
-          >
-            Why Choose Us
-          </Typography>
+           <Box
+      sx={{
+        width: "100%",
+        py: { xs: 5, md: 12 },
+        backgroundColor: "#f8f9fa",
+      }}
+    >
+      <Container>
+        {/* Section Header */}
+        <Typography
+          sx={{
+            color: "red",
+            textAlign: "center",
+            fontWeight: 600,
+            fontSize: { xs: "1.1rem", md: "1.3rem" },
+            mb: 1,
+          }}
+        >
+          Why Choose Us
+        </Typography>
 
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 700,
-              textAlign: "center",
-              fontSize: { xs: "1.8rem", md: "2.5rem" },
-              mb: 4,
-            }}
-          >
-            Great Car Service
-          </Typography>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 700,
+            textAlign: "center",
+            fontSize: { xs: "1.8rem", md: "2.5rem" },
+            mb: 6,
+          }}
+        >
+          Great Car Service
+        </Typography>
 
-          <Box
-            sx={{
-              display: "grid",
-              gap: { xs: 3, sm: 3, md: 4 },
-              gridTemplateColumns: {
-                xs: "1fr",
-                sm: "1fr 1fr",
-                md: "repeat(4, 1fr)",
-              },
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {[image4, image5, image6, image7].map((img, index) => (
+        {/* Grid of Cards */}
+        <Box
+          sx={{
+            display: "grid",
+            gap: { xs: 5, sm: 5, md: 6 },
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr",
+              md: "repeat(4, 1fr)",
+            },
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {images.map((img, index) => (
+            <Box
+              key={index}
+              className="hoverCard"
+              sx={{
+                textAlign: "center",
+                mx: "auto",
+                width: 180,
+                height: 180,
+                borderRadius: "50%",
+                position: "relative",
+                transition: "all 0.4s ease",
+                boxShadow: "0 0 0 rgba(0,0,0,0)",
+                "&:hover": {
+                  transform: "translateY(-12px) scale(1.05)",
+                  boxShadow: "0 10px 25px rgba(0, 0, 0, 0.15)",
+                },
+              }}
+            >
               <Box
-                key={index}
                 sx={{
-                  width: { xs: "100%", sm: "100%", md: 280 },
-                  maxWidth: "280px",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  position: "relative",
                   width: "180px",
                   height: "180px",
-                  margin: "0 auto",
                   borderRadius: "50%",
-                  overflow: "visible",
-                  transition: "color 0.3s ease",
-                  "&:hover img": {
-                    transform: "scale(1.1)",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-                  },
-                  "&:hover h6": {
-                    color: "#d90429",
-                  },
+                  overflow: "hidden",
+                  position: "relative",
                 }}
               >
-                <Box
-                  className="borderRing"
-                  sx={{
-                    position: "absolute",
-                    top: -8,
-                    left: -8,
-                    width: "calc(100% + 16px)",
-                    height: "calc(100% + 16px)",
-                    borderRadius: "50%",
-                    border: "4px solid transparent",
-                    borderTopColor: "#d90429",
-                    borderRightColor: "#d90429",
-                    animation: "rotateBorder 3s linear infinite",
-                    boxShadow: "0 0 8px #d90429",
-                    transition: "box-shadow 0.3s ease",
-                  }}
-                ></Box>
-
                 <img
                   src={img}
                   alt={`service-${index}`}
                   style={{
-                    width: "180px",
-                    height: "180px",
-                    borderRadius: "50%",
+                    width: "100%",
+                    height: "100%",
                     objectFit: "cover",
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    position: "relative",
-                    zIndex: 1,
+                    transition: "transform 0.4s ease",
                   }}
                 />
-
-                <Typography
-                  variant="h6"
-                  sx={{
-                    mt: 2,
-                    fontWeight: "bold",
-                    fontSize: { xs: "1rem", md: "1.2rem" },
-                    transition: "color 0.3s ease",
-                    color: "black",
-                  }}
-                >
-                  {[
-                    "Engine Diagnostics",
-                    "System Service",
-                    "Electrical System",
-                    "Tire and Wheel",
-                  ][index]}
-                </Typography>
               </Box>
-            ))}
-          </Box>
-        </Container>
 
-        <style>
-          {`
-      @keyframes rotateBorder {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    `}
-        </style>
-      </Box>
-
-
+              <Typography
+                variant="h6"
+                sx={{
+                  mt: 2,
+                  fontWeight: "bold",
+                  fontSize: { xs: "1rem", md: "1.2rem" },
+                  color: "#111",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                {titles[index]}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Container>
+    </Box>
       {/* 5th section */}
 
       <Box
@@ -814,54 +742,60 @@ const Home = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           width: "100%",
-          paddingTop: "50px",
-          marginBottom: "50px",
+          py: { xs: 6, sm: 8 },
+          mb: 6,
         }}
       >
         <Container>
           <Box
             sx={{
               display: "flex",
-              flexWrap: "wrap",
-              textAlign: "left",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: "center",
+              justifyContent: "space-between",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
+            {/* Left Empty Box (You can put image or content here if needed) */}
             <Box
               sx={{
-                width: "calc(50% - 40px)",
-                margin: "20px",
-                textAlign: "center",
+                width: { xs: "100%", md: "50%" },
+                mb: { xs: 4, md: 0 },
               }}
             ></Box>
+
+            {/* Text Section */}
             <Box
               sx={{
-                width: "calc(50% - 40px)",
-                margin: "20px",
-                textAlign: "center",
+                width: { xs: "100%", md: "50%" },
               }}
             >
-              <Typography sx={{ color: "red", textAlign: "left" }}>
-                Call Us
-              </Typography>
+              <Typography sx={{ color: "red", mb: 1 }}>Call Us</Typography>
+
               <Typography
-                variant="h3"
-                sx={{ color: "white", textAlign: "left", fontWeight: "600" }}
+                variant="h4"
+                sx={{ color: "white", fontWeight: "600", mb: 2 }}
               >
                 Imagine Your Car Feeling New Again
               </Typography>
+
               <Typography
                 variant="h6"
-                sx={{ color: "gray", textAlign: "left", fontSize: "18px" }}
+                sx={{ color: "gray", fontSize: "18px", mb: 3 }}
               >
-                {" "}
                 Questions? Give us a call today at{" "}
-                <a style={{ color: "red" }}>+(91) 955 909 8899 </a>
+                <a style={{ color: "red", textDecoration: "none" }}>
+                  +(91) 955 909 8899
+                </a>
               </Typography>
-              <Typography
+
+              {/* Buttons */}
+              <Box
                 sx={{
                   display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "left",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 2,
+                  justifyContent: { xs: "center", md: "flex-start" },
                 }}
               >
                 <motion.div whileHover={{ scale: 1.05 }}>
@@ -869,14 +803,16 @@ const Home = () => {
                     onClick={() => navigate("/Services")}
                     variant="outlined"
                     sx={{
-                      border: "1px solid rgb(255, 255, 255)",
+                      border: "1px solid white",
                       borderRadius: "5px",
-                      padding: "10px 30px ",
-                      margin: "20px ",
-                      color: "rgb(255, 255, 255)",
+                      px: 4,
+                      py: 1.5,
+                      color: "white",
                       fontWeight: "700",
-                      "&:hover": { backgroundColor: "white", color: "red" },
-                      display: { xs: "none", sm: "block" },
+                      "&:hover": {
+                        backgroundColor: "white",
+                        color: "red",
+                      },
                     }}
 
                   >
@@ -889,21 +825,23 @@ const Home = () => {
                     onClick={() => navigate("/Contect")}
                     variant="outlined"
                     sx={{
-                      border: "0px solid rgb(255, 255, 255)",
+                      border: "none",
                       borderRadius: "5px",
-                      padding: "10px 30px ",
-                      margin: "20px",
-                      color: "rgb(255, 0, 0)",
+                      px: 4,
+                      py: 1.5,
+                      color: "red",
                       backgroundColor: "white",
                       fontWeight: "700",
-                      "&:hover": { backgroundColor: "red", color: "white" },
-                      display: { xs: "none", sm: "block" },
+                      "&:hover": {
+                        backgroundColor: "red",
+                        color: "white",
+                      },
                     }}
                   >
                     Contact Us
                   </Button>
                 </motion.div>
-              </Typography>
+              </Box>
             </Box>
           </Box>
         </Container>

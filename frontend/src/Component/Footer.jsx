@@ -36,6 +36,7 @@ if (!document.getElementById("animated-footer-bg-keyframes")) {
   document.head.appendChild(styleTag);
 }
 
+
 const Footer = () => {
   const [formData, setFormData] = useState({ email: "" });
 
@@ -56,7 +57,7 @@ const Footer = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/footer", formData);
+      await axios.post("https://full-stack-1-jmh6.onrender.com/footer", formData);
       alert("✅ Subscription successful!");
       subscribedEmails.push(formData.email);
       localStorage.setItem("subscribedEmails", JSON.stringify(subscribedEmails));
@@ -66,6 +67,8 @@ const Footer = () => {
       alert("Something went wrong!");
     }
   };
+ 
+  
 
   return (
     <Box

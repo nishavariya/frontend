@@ -41,7 +41,7 @@ const Contact = () => {
     e.preventDefault();
     try {
 
-      await axios.post("http://localhost:5000/contect", formData);
+      await axios.post("https://full-stack-1-jmh6.onrender.com/api/contect", formData);
       setFormData({ name: "", email: "", subject: "", message: "" });
       setSnackbarOpen(true);
     } catch (error) {

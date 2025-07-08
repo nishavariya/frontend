@@ -1,123 +1,16 @@
-// import React, { useEffect, useState } from "react";
-// import {
-//   Container,
-//   Typography,
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableContainer,
-//   TableHead,
-//   TableRow,
-//   Paper,
-//   Button,
-// } from "@mui/material";
 
-// import Footer from "../Component/Footer";
-// import Top from "../Component/Top";
-
-// const AppointmentTable = () => {
-//   const [appointments, setAppointments] = useState([]);
-
-//   useEffect(() => {
-//     fetchAppointments();
-//   }, []);
-
-//   const fetchAppointments = async () => {
-//     try {
-//       const response = await fetch("http://localhost:5000/api/appointments");
-//       const data = await response.json();
-//       setAppointments(data);
-//     } catch (error) {
-//       console.error("Error fetching appointments:", error);
-//     }
-//   };
-
-//   const handleDelete = async (id) => {
-//     try {
-//       await fetch(`http://localhost:5000/api/appointments/${id}`, {
-//         method: "DELETE",
-//       });
-//       // Refresh the list after deletion
-//       fetchAppointments();
-//     } catch (error) {
-//       console.error("Error deleting appointment:", error);
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Top />
-//       <Container sx={{ my: 5 }}>
-//         <Typography variant="h4" align="center" gutterBottom>
-//           📋 All Appointments
-//         </Typography>
-
-//         <TableContainer component={Paper}>
-//           <Table>
-//             <TableHead>
-//               <TableRow>
-//                 <TableCell>Name</TableCell>
-//                 <TableCell>Email</TableCell>
-//                 <TableCell>Phone</TableCell>
-//                 <TableCell>Vehicle</TableCell>
-//                 <TableCell>Year</TableCell>
-//                 <TableCell>Services</TableCell>
-//                 <TableCell>Date</TableCell>
-//                 <TableCell>Time Frame</TableCell>
-//                 <TableCell>Actions</TableCell> {/* New header cell */}
-//               </TableRow>
-//             </TableHead>
-//             <TableBody>
-//               {appointments.map((row, index) => (
-//                 <TableRow key={index}>
-//                   <TableCell>{row.name}</TableCell>
-//                   <TableCell>{row.email}</TableCell>
-//                   <TableCell>{row.phone}</TableCell>
-//                   <TableCell>{row.vehicleMake}</TableCell>
-//                   <TableCell>{row.vehicleYear}</TableCell>
-//                   <TableCell>{row.selectedServices?.join(", ")}</TableCell>
-//                   <TableCell>{row.appointmentDate}</TableCell>
-//                   <TableCell>{row.timeFrame}</TableCell>
-//                   <TableCell>
-//                     {/* Update button can be connected to a modal or route */}
-//                     <Button
-//                       variant="outlined"
-//                       color="primary"
-//                       size="small"
-//                       sx={{ mr: 1 }}
-//                       onClick={() => alert("Update functionality coming soon")}
-//                     >
-//                       Update
-//                     </Button>
-//                     <Button
-//                       variant="outlined"
-//                       color="error"
-//                       size="small"
-//                       onClick={() => handleDelete(row._id)}
-//                     >
-//                       Delete
-//                     </Button>
-//                   </TableCell>
-//                 </TableRow>
-//               ))}
-//             </TableBody>
-//           </Table>
-//         </TableContainer>
-//       </Container>
-//       <Footer />
-//     </>
-//   );
-// };
-
-// export default AppointmentTable;
 
 import React, { useEffect, useState } from "react";
 import {
   Container, Typography, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper, Button, TextField, MenuItem, Select
+  TableHead, TableRow, Paper, Button, TextField, MenuItem, Select,Box
 } from "@mui/material";
 import Footer from "../Component/Footer";
 import Top from "../Component/Top";
+import { Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+
 
 const allServices = [
   "Air Conditioning", "Brakes Repair", "Engine Diagnostics", "Heating & Cooling",
@@ -155,7 +48,7 @@ const AppointmentTable = () => {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/appointments/");
+      const response = await fetch("https://full-stack-1-jmh6.onrender.com/api/appointments/");
       const data = await response.json();
       const userEmail = localStorage.getItem("userEmail");
       const userAppointments = data.filter(item => item.email === userEmail);
@@ -167,7 +60,7 @@ const AppointmentTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/appointments/${id}`, { method: "DELETE" });
+      await fetch(`https://full-stack-1-jmh6.onrender.com/api/appointments/${id}`, { method: "DELETE" });
       fetchAppointments();
     } catch (error) {
       console.error("Error deleting appointment:", error);
@@ -188,7 +81,7 @@ const AppointmentTable = () => {
 
   const saveUpdate = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/appointments/${id}`, {
+      const response = await fetch(`https://full-stack-1-jmh6.onrender.com/api/appointments/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -363,6 +256,32 @@ const AppointmentTable = () => {
           </Table>
         </TableContainer>
       </Container>
+
+       {/* Back Button */}
+      <Box sx={{ textAlign: "center", mt: 4, mb: 6 }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Box
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              backgroundColor: "#d90429",
+              color: "white",
+              px: 3,
+              py: 1.2,
+              borderRadius: "8px",
+              fontWeight: "bold",
+              transition: "background 0.3s, transform 0.2s",
+              "&:hover": {
+                backgroundColor: "#b40321",
+                transform: "translateY(-2px)",
+              },
+            }}
+          >
+            <ArrowBackIcon sx={{ mr: 1 }} />
+            Back to Home 🏡
+          </Box>
+        </Link>
+      </Box>
       <Footer />
     </>
   );

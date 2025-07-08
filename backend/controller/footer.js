@@ -11,3 +11,13 @@ exports.subscribeEmail = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error." });
   }
 };
+// READ
+exports.get = async (req, res) => {
+  try {
+    const footers = await Footer.find();
+    res.status(200).json(footers);
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to fetch footers", error });
+  }
+};
+

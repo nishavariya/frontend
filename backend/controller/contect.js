@@ -11,3 +11,12 @@ exports.submitContactForm = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error. Try again later." });
   }
 };
+// READ
+exports.get = async (req, res) => {
+  try {
+    const contacts = await Contact.find();
+    res.status(200).json(contacts);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch contacts", error });
+  }
+};

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { submitContactForm } = require("../controller/contect");
+const US   = require("../controller/contect");
 
-router.post("/", submitContactForm);
+router.post("/", US.submitContactForm);
+router.get("/", US.get);
 
 module.exports = router;
